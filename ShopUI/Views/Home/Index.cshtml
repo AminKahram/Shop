@@ -1,5 +1,5 @@
-﻿@model List<Product>
-@foreach (var item in Model)
+﻿@model PageData<Product>
+@foreach (var item in Model.Data)
 {
     <div>
         <h1>@item.Name<span><small>@item.Price</small></span></h1>
