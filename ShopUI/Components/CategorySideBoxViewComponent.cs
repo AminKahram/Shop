@@ -11,8 +11,10 @@ namespace ShopUI.Components
         {
             this.productRepository = productRepository;
         }
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke()  
         {
+            var CurrentCategory = RouteData?.Values["Category"];
+            ViewBag.Category = CurrentCategory;
             return View(productRepository.GetCategories());
         }
     }
