@@ -29,9 +29,14 @@ namespace ShopUI.Infarstructures
         {
             IUrlHelper urlHelper = urlHelperFactory.GetUrlHelper(ViewContext);
             TagBuilder result = new("div");
-            //2 - 06 - 8:00
-            //for (int i = 1; i<=Page)
-
+            for (int i = 1; i<= PageModel.PageCount; i++)
+            {
+                TagBuilder tag = new("a");
+                tag.Attributes["href"] = urlHelper.Action(PageAction, new { PageNumber = i });
+                tag.InnerHtml.Append(i.ToString());
+                result.InnerHtml.AppendHtml(tag);
+            }
+            output.Content.AppendHtml(result.InnerHtml);
             //base.Process(context, output);
         }
     }
