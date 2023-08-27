@@ -7,7 +7,7 @@ namespace ShopUI.Controllers
     public class HomeController : Controller
     {
         private readonly IProductRepository _productRepository;
-        private ushort PageSize = 4;
+        private ushort PageSize = 2;
         public HomeController(IProductRepository productRepository)
         {
                 this._productRepository = productRepository;

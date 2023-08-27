@@ -1,0 +1,10 @@
+﻿@model List<string>
+<a asp-controller="home" asp-action="index" asp-route-category="" asp-route-pageNumber="1" class="btn btn-info">
+    Home
+</a>
+@foreach (var item in Model)
+{
+    <a asp-controller="home" asp-action="index" asp-route-category="@item" asp-route-pageNumber="1" class="btn btn-info">
+        @item
+    </a>
+}

@@ -3,6 +3,7 @@
     public interface IProductRepository
     {
         PageData<Product> GetAll(ushort PageNumber, ushort PageSize, string Category);
+        List<string> GetCategories();
     }
     public class EFProductRepository : IProductRepository
     {
@@ -26,5 +27,7 @@
             return result;
             
         }
+        public List<string> GetCategories() =>
+            _dbContext.products.Select(p => p.Category).Distinct().ToList();   
     }
 }
