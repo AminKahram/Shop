@@ -2,7 +2,7 @@
 {
     public interface IProductRepository
     {
-        PageData<Product> GetAll(ushort PageNumber, ushort PageSize);
+        PageData<Product> GetAll(ushort PageNumber, ushort PageSize, string Category);
     }
     public class EFProductRepository : IProductRepository
     {
@@ -11,7 +11,7 @@
         {
             this._dbContext = storeDB;
         }
-        public PageData<Product> GetAll(ushort PageNumber, ushort PageSize)
+        public PageData<Product> GetAll(ushort PageNumber, ushort PageSize, string Category)
         {
             var result = new PageData<Product>
             {
@@ -19,9 +19,9 @@
                 {
                     PageNumber = PageNumber,
                     PageSize = PageSize,
-                    TotalCount = _dbContext.products.Count()
+                    TotalCount = _dbContext.products.Where(p => p.Category == Category || string.IsNullOrWhiteSpace(Category)).Count()
                 },
-                Data = _dbContext.products.Skip((PageNumber - 1) * PageSize).Take(PageSize).ToList()
+                Data = _dbContext.products.Where(p => p.Category==Category || string.IsNullOrWhiteSpace(Category)).Skip((PageNumber - 1) * PageSize).Take(PageSize).ToList()
             };
             return result;
             

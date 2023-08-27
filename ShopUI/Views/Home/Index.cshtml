@@ -1,8 +1,9 @@
-﻿@model PageData<Product>
-@foreach (var item in Model.Data)
+﻿@model ProductCategoryViewModel
+@foreach (var item in Model.ProductPageData.Data)
 {
-    @Html.Partial("ProductSummery",item);
+    <div class="card card-group ">
+        @Html.Partial("ProductSummery",item)
+    </div>
 }
-<div page-model="Model.pageInfo" page-action="index" page-class-enabled="true" page-class="btn" page-class-normal="btn-info" page-class-selected="btn-succes">
-
+<div class="btn-group m-1" page-model="Model.ProductPageData.pageInfo" page-action="index" page-class-enabled="true" page-class="btn" page-class-normal="btn-outline-dark" page-class-selected="btn-success">
 </div>

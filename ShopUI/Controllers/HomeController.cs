@@ -12,9 +12,14 @@ namespace ShopUI.Controllers
         {
                 this._productRepository = productRepository;
         }
-        public IActionResult Index(ushort PageNumber = 1)
+        public IActionResult Index(string Category = "", ushort PageNumber = 1)
         {
-            return View(_productRepository.GetAll(PageNumber, PageSize));
+            ProductCategoryViewModel viewModel = new ProductCategoryViewModel
+            {
+                ProductPageData = _productRepository.GetAll(PageNumber, PageSize, Category),
+                Category = Category
+            };
+            return View(viewModel);
         }
     }
 }
