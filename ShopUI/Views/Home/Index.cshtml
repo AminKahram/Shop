@@ -1,10 +1,7 @@
 ﻿@model PageData<Product>
 @foreach (var item in Model.Data)
 {
-    <div>
-        <h1>@item.Name<span><small>@item.Price</small></span></h1>
-        <p>@item.Description</p>
-    </div>
+    @Html.Partial("ProductSummery",item);
 }
 <div page-model="Model.pageInfo" page-action="index" page-class-enabled="true" page-class="btn" page-class-normal="btn-info" page-class-selected="btn-succes">
 
