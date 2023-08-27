@@ -33,6 +33,11 @@ namespace ShopUI.Infarstructures
             {
                 TagBuilder tag = new("a");
                 tag.Attributes["href"] = urlHelper.Action(PageAction, new { PageNumber = i });
+                if (PageClassEnabled)
+                {
+                    tag.AddCssClass(PageClass);
+                    tag.AddCssClass(i == PageModel.PageNumber ? PageClassSelected : PageClassNormal);
+                }
                 tag.InnerHtml.Append(i.ToString());
                 result.InnerHtml.AppendHtml(tag);
             }
