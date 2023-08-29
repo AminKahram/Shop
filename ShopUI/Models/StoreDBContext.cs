@@ -5,6 +5,7 @@ namespace ShopUI.Models;
 public class StoreDBContext:DbContext
 {
     public DbSet<Product> products { get; set; }
+    public DbSet<Order> Orders { get; set; }
     public StoreDBContext(DbContextOptions options):base(options)
     {
         
