@@ -3,17 +3,18 @@
 public class BasketController : Controller
 {
     private readonly IProductRepository productRepository;
-     
-    public BasketController(IProductRepository productRepository)
+    private readonly Basket sessionBasket;
+
+    public BasketController(IProductRepository productRepository, Basket sessionBasket)
     {
         this.productRepository = productRepository;
+        this.sessionBasket = sessionBasket;
     }
     public IActionResult Index(string returnUrl)
     {
-        var basket = GetBasket();
         BasketViewModel viewModel = new BasketViewModel
         { 
-            Basket = basket,
+            Basket = sessionBasket,
             ReturnUrl = returnUrl
         };
         return View(viewModel);
@@ -21,28 +22,16 @@ public class BasketController : Controller
     public IActionResult AddToBasket(int productId, string returnUrl)
     {
         var product = productRepository.GetProductById(productId);
-        var basket = GetBasket();
-        basket.Add(product, 1);
-        SaveBasket(basket);
+        sessionBasket.Add(product, 1);
+
         return RedirectToAction("Index", new { returnUrl = returnUrl });
     }
-
-    
-
     public IActionResult RemoveFromBasket(int productId)
     {
         var product = productRepository.GetProductById(productId).Id;
-        var basket = GetBasket();
-        basket.Remove(product);
-        SaveBasket(basket); 
+        sessionBasket.Remove(product);
+
         return RedirectToAction("Index");
     }
-    private Basket GetBasket()
-    {
-       return HttpContext.Session.GetJson<Basket>("Basket");
-    }
-    private void SaveBasket(Basket basket)
-    {
-        HttpContext.Session.SetJson("Basket", basket);
-    }
+    
 }

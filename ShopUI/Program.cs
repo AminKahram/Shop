@@ -4,9 +4,14 @@ using ShopUI.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+
 var cnnString = builder.Configuration.GetConnectionString("StoreCnn");
+
 builder.Services.AddDbContext<StoreDBContext>(options => options.UseSqlServer(cnnString));
 builder.Services.AddScoped<IProductRepository, EFProductRepository>();
+builder.Services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
+builder.Services.AddScoped<Basket>(s=>SessionBasket.GetBasket(s));
+
 builder.Services.AddMemoryCache();
 builder.Services.AddSession();
 var app = builder.Build();
