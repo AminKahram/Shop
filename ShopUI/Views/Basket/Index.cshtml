@@ -1,0 +1,15 @@
+﻿@model BasketViewModel
+<table>
+    @foreach (var item in Model.Basket.BasketItems)
+    {
+        <tr>
+            <td>@item.Product.Name</td>
+            <td>@item.Product.Price</td>
+            <td>@item.Quantity</td>
+        </tr>   
+    }
+    <tr>
+        <td>TotalPrice</td>
+        <td colspan="2">@Model.Basket.TotalPrice()</td>
+    </tr>
+</table>

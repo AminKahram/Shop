@@ -4,6 +4,7 @@
     {
         PageData<Product> GetAll(ushort PageNumber, ushort PageSize, string Category);
         List<string> GetCategories();
+        Product GetProductById(int ProductId);
     }
     public class EFProductRepository : IProductRepository
     {
@@ -28,6 +29,11 @@
             
         }
         public List<string> GetCategories() =>
-            _dbContext.products.Select(p => p.Category).Distinct().ToList();   
+            _dbContext.products.Select(p => p.Category).Distinct().ToList();
+
+        public Product GetProductById(int ProductId)
+            => _dbContext.products.FirstOrDefault(prod => prod.Id == ProductId);
+
+        
     }
 }
