@@ -1,8 +1,7 @@
-﻿namespace ShopUI.Models
+﻿namespace ShopUI.Models;
+
+public class BasketViewModel
 {
-    public class BasketViewModel
-    {
-        public Basket Basket { get; set; }
-        public string ReturnUrl { get; set; }
-    }
+    public Basket Basket { get; set; }
+    public string ReturnUrl { get; set; }
 }

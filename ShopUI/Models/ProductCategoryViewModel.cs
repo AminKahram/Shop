@@ -1,8 +1,7 @@
-﻿namespace ShopUI.Models
+﻿namespace ShopUI.Models;
+
+public class ProductCategoryViewModel
 {
-    public class ProductCategoryViewModel
-    {
-        public PageData<Product> ProductPageData { get; set; }
-        public string Category { get; set; }
-    }
+    public PageData<Product> ProductPageData { get; set; }
+    public string Category { get; set; }
 }
