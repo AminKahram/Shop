@@ -7,8 +7,8 @@ namespace ShopUI.Controllers
     public class BasketController : Controller
     {
         private readonly IProductRepository productRepository;
-
-        BasketController(IProductRepository productRepository)
+        
+        public BasketController(IProductRepository productRepository)
         {
             this.productRepository = productRepository;
         }
@@ -28,13 +28,17 @@ namespace ShopUI.Controllers
             var basket = GetBasket();
             basket.Add(product, 1);
             SaveBasket(basket);
-            return RedirectToAction("Index", new { returnUrl = returnUrl});
+            return RedirectToAction("Index", new { returnUrl = returnUrl });
         }
 
         
 
         public IActionResult RemoveFromBasket(int productId)
         {
+            var product = productRepository.GetProductById(productId).Id;
+            var basket = GetBasket();
+            basket.Remove(product);
+            SaveBasket(basket);
             return RedirectToAction("Index");
         }
         private Basket GetBasket()
