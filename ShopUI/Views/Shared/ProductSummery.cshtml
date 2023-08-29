@@ -1,11 +1,11 @@
 ﻿@model Product
 <div class="card-body m-1 p-1">
     <h4 class="card-header card-title">@Model.Name<span><small>@Model.Price</small></span>
-        <form>
-            <input type="hidden" value="@Model.Id" name="productId"/>
-            <input type="hidden" value="home/index"/>
+        <form asp-controller="Basket" asp-action="AddToBasket" method="post">
+            <input type="hidden" value="@Model.Id" name="productId" />
+            <input type="hidden" value="@ViewContext.HttpContext.Request.Path" name="returnUrl" />
+            <input type="submit" value="Add to Cart" />
         </form>
-        @*3 - 11 - 16:00 *@
     </h4>
     <p class="card-text">@Model.Description</p>
 </div>
