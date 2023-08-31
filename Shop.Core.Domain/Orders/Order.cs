@@ -8,9 +8,3 @@ public class Order
     public string Address { get; set; }
     public List<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
 }
-public class OrderDetail
-{
-    public int Id { get; set; }
-    public Product Product { get; set; }
-    public ushort Quantity { get; set; }
-}
